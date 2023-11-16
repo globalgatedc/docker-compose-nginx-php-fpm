@@ -1,0 +1,46 @@
+version: "3"
+
+services:
+  nginx:
+    image: nginx:latest
+    user: "nginx"
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./config/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./config/nginx/dhparam:/etc/nginx/dhparam
+      - ./apps/app1:/var/www/app1
+      - ./apps/app2:/var/www/app2
+    depends_on:
+      - php-fpm-7.1
+      - php-fpm-7.4
+
+  php-fpm-7.1:
+    image: php:7.1-fpm
+    ports:
+      - "9001:9000"
+    user: "www-data"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 512M
+    volumes:
+      - ./apps/app1:/var/www/app1
+      - ./config/php-fpm-7.1/php-fpm-7.1.conf:/usr/local/etc/php-fpm.d/zz-custom.conf
+      - ./config/php-fpm-7.1/php-7.1-custom.ini:/usr/local/etc/php/conf.d/zz-custom.ini
+
+  php-fpm-7.4:
+    image: php:7.4-fpm
+    ports:
+      - "9002:9000"
+    user: "www-data"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 512M
+    volumes:
+      - ./apps/app2:/var/www/app2
+      - ./config/php-fpm-7.4/php-fpm-7.4.conf:/usr/local/etc/php-fpm.d/zz-custom.conf
+      - ./config/php-fpm-7.4/php-7.4-custom.ini:/usr/local/etc/php/conf.d/zz-custom.ini
