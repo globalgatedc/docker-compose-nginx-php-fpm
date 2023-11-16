@@ -2,7 +2,7 @@ version: "3"
 
 services:
   nginx:
-    image: nginx:latest
+    image: nginx:stable
     user: "nginx"
     ports:
       - "8080:8080"
@@ -16,7 +16,10 @@ services:
       - php-fpm-7.4
 
   php-fpm-7.1:
-    image: php:7.1-fpm
+    image: php-fpm-7.1
+    build:
+      context: .
+      dockerfile: docker/php-fpm-7.1/Dockerfile
     ports:
       - "9001:9000"
     user: "www-data"
@@ -31,7 +34,10 @@ services:
       - ./config/php-fpm-7.1/php-7.1-custom.ini:/usr/local/etc/php/conf.d/zz-custom.ini
 
   php-fpm-7.4:
-    image: php:7.4-fpm
+    image: php-fpm-7.4
+    build:
+      context: .
+      dockerfile: docker/php-fpm-7.4/Dockerfile
     ports:
       - "9002:9000"
     user: "www-data"
