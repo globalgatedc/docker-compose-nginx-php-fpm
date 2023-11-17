@@ -20,8 +20,7 @@ RUN apt-get update && \
   zip && \
   docker-php-ext-configure gd && \
   docker-php-ext-install -j$(nproc) \
-  gd && \
-  docker-php-ext-install -j$(nproc) \
+  gd \
   pdo_mysql \
   mbstring \
   curl \
