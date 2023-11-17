@@ -1,4 +1,3 @@
-# Use the official php-fpm 7.1 image as the base image
 FROM php:7.1-fpm
 
 # Install required extensions
@@ -14,16 +13,13 @@ RUN apt-get update && \
   libxml2-dev \
   libzip-dev && \
   rm -rf /var/lib/apt/lists/* && \
-
   docker-php-ext-install \
   bcmath \
   opcache \
   zip && \
-
   docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
   docker-php-ext-install -j$(nproc) \
   gd && \
-
   docker-php-ext-install -j$(nproc) \
   pdo_mysql \
   mbstring \
