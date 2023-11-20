@@ -25,12 +25,12 @@ Make sure you have Docker and Docker Compose installed on your system. If Docker
 
    ```bash
    git clone https://github.com/globalgatedc/docker-compose-nginx-php-fpm.git
-   cd your-repository
+   cd docker-compose-nginx-php-fpm
    ```
 
-2. Create a `config/nginx/nginx.conf` file with a production-ready Nginx configuration. Ensure the configuration includes proper hardening, request limits, SSL settings, etc. (you can use the provided example as a starting point).
+2. Make any changes as needed on `config/nginx/nginx.conf` file with a production-ready Nginx configuration. Ensure the configuration includes proper hardening, request limits, SSL settings, etc. (you can use the provided example as a starting point).
 
-3. Create `docker/php-fpm-7.1/Dockerfile` and `docker/php-fpm-7.4/Dockerfile` for PHP-FPM 7.1 and PHP-FPM 7.4 respectively (you can use your own PHP configurations).
+3. Make any changes as needed on `docker/php-fpm-7.1/Dockerfile` and `docker/php-fpm-7.4/Dockerfile` for PHP-FPM 7.1 and PHP-FPM 7.4 respectively (you can use your own PHP configurations).
 
 4. Adjust the volumes in the `docker-compose.yml` file to point to your application directories and configuration files.
 
