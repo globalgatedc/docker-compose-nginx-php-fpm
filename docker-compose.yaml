@@ -30,7 +30,7 @@ services:
       dockerfile: docker/php-fpm-7.1/Dockerfile
     ports:
       - "9001:9000"
-    user: "www-data" # Set the UID of www-data to match the host
+    user: "www-data"
     privileged: false
     restart: unless-stopped
     deploy:
@@ -50,7 +50,7 @@ services:
       dockerfile: docker/php-fpm-7.4/Dockerfile
     ports:
       - "9002:9000"
-    user: "www-data" # Set the UID of www-data to match the host
+    user: "www-data"
     privileged: false
     restart: unless-stopped
     deploy:

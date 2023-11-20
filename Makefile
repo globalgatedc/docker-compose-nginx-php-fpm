@@ -4,7 +4,7 @@ COMPOSE := $(DOCKER) compose
 .PHONY: up down ps exec-nginx exec-php-7.1 exec-php-7.4 logs clean
 
 up:
-	$(COMPOSE) up -d
+	$(COMPOSE) up -d --force-recreate
 
 down:
 	$(COMPOSE) down
