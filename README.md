@@ -24,7 +24,7 @@ Make sure you have Docker and Docker Compose installed on your system. If Docker
 1. Clone this repository:
 
    ```bash
-   git clone https://github.com/yourusername/your-repository.git
+   git clone https://github.com/globalgatedc/docker-compose-nginx-php-fpm.git
    cd your-repository
    ```
 
@@ -34,31 +34,14 @@ Make sure you have Docker and Docker Compose installed on your system. If Docker
 
 4. Adjust the volumes in the `docker-compose.yml` file to point to your application directories and configuration files.
 
-5. Create a `Makefile` with the contents provided in this repository.
-
-6. Run the following commands:
+5. Run the following commands:
 
    ```bash
    # Start the Docker Compose services
    make up
 
-   # View the status of the Docker Compose services
-   make ps
-
-   # Open a Bash shell in the Nginx container
-   make exec-nginx
-
-   # Open a Bash shell in the PHP-FPM 7.1 container
-   make exec-php-7.1
-
-   # Open a Bash shell in the PHP-FPM 7.4 container
-   make exec-php-7.4
-
    # View logs from the Docker Compose services
    make logs
-
-   # Stop and remove the Docker Compose services along with volumes
-   make clean
    ```
 
 ## Docker Installation
