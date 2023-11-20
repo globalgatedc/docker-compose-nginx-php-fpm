@@ -22,10 +22,11 @@ exec-php-7.4:
 	$(COMPOSE) exec php-fpm-7.4 bash
 
 # usage: make exec-composer dir=../project cmd="composer install"
-dir ?= .
-cmd ?= bash
 exec-composer:
-	$(COMPOSE) run --rm --user $(id -u):$(id -g) composer bash -c "cd $(dir) && $(cmd)"
+	$(COMPOSE) run --rm --user $(id -u):$(id -g) composer bash -c "cd $(dir ?= .) && $(cmd ?= bash)"
+
+exec-node:
+	$(COMPOSE) run --rm --user $(id -u):$(id -g) node sh
 
 logs:
 	$(COMPOSE) logs -f
