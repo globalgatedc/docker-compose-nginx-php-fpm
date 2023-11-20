@@ -1,0 +1,11 @@
+{
+    "name": "root/app1",
+    "require": {
+        "predis/predis": "^2.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Root\\App1\\": "src/"
+        }
+    }
+}

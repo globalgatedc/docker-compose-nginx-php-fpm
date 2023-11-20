@@ -21,6 +21,12 @@ exec-php-7.1:
 exec-php-7.4:
 	$(COMPOSE) exec php-fpm-7.4 bash
 
+# usage: make exec-composer dir=../project cmd="composer install"
+dir ?= .
+cmd ?= bash
+exec-composer:
+	$(COMPOSE) run --rm --user $(id -u):$(id -g) composer bash -c "cd $(dir) && $(cmd)"
+
 logs:
 	$(COMPOSE) logs -f
 

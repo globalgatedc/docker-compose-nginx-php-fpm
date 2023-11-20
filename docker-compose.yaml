@@ -30,7 +30,7 @@ services:
       dockerfile: docker/php-fpm-7.1/Dockerfile
     ports:
       - "9001:9000"
-    user: "www-data"
+    user: "www-data" # Set the UID of www-data to match the host
     privileged: false
     restart: unless-stopped
     deploy:
@@ -50,7 +50,7 @@ services:
       dockerfile: docker/php-fpm-7.4/Dockerfile
     ports:
       - "9002:9000"
-    user: "www-data"
+    user: "www-data" # Set the UID of www-data to match the host
     privileged: false
     restart: unless-stopped
     deploy:
@@ -62,3 +62,22 @@ services:
       - ./apps/app2:/var/www/app2
       - ./config/php-fpm-7.4/php-fpm-7.4.conf:/usr/local/etc/php-fpm.d/zz-custom.conf
       - ./config/php-fpm-7.4/php-7.4-custom.ini:/usr/local/etc/php/conf.d/zz-custom.ini
+
+  composer:
+    image: composer
+    privileged: true
+    working_dir: /var/www
+    volumes:
+      - ./apps/app1:/var/www/app1
+      - ./apps/app2:/var/www/app2
+
+  node:
+    image: node
+    build:
+      context: .
+      dockerfile: docker/node/Dockerfile
+    privileged: true
+    working_dir: /var/www
+    volumes:
+      - ./apps/app1:/var/www/app1
+      - ./apps/app2:/var/www/app2

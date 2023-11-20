@@ -58,6 +58,7 @@ The Docker installation instructions can vary based on your operating system. Pl
 - **`make exec-nginx`:** Opens a Bash shell in the Nginx container.
 - **`make exec-php-7.1`:** Opens a Bash shell in the PHP-FPM 7.1 container.
 - **`make exec-php-7.4`:** Opens a Bash shell in the PHP-FPM 7.4 container.
+- **`make exec-composer`:** Opens a Bash shell in the default dir, or accepts a path argument to open a Bash shell or run a command in a specific directory. example: make exec-composer dir=/var/www/app1 cmd="composer install"
 - **`make logs`:** Views logs from the Docker Compose services.
 - **`make clean`:** Stops and removes the Docker Compose services along with volumes.
 
