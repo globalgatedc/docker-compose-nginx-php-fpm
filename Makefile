@@ -4,7 +4,7 @@ COMPOSE := $(DOCKER) compose
 .PHONY: up down ps exec-nginx exec-php-7.1 exec-php-7.4 logs clean
 
 up:
-	$(COMPOSE) up -d --force-recreate
+	$(COMPOSE) up -d --force-recreate --no-cache
 
 down:
 	$(COMPOSE) down
@@ -28,7 +28,7 @@ exec-composer:
 	$(COMPOSE) run --rm --user $(id -u):$(id -g) composer bash -c "cd $(dir) && $(cmd)"
 
 exec-node:
-	$(COMPOSE) run --rm --user $(id -u):$(id -g) node bash
+	$(COMPOSE) run --rm --user $(id -u):$(id -g) node bash -c "cd $(dir) && $(cmd)"
 
 logs:
 	$(COMPOSE) logs -f

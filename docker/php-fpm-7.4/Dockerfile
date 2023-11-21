@@ -43,5 +43,7 @@ RUN docker-php-ext-enable \
   xml \
   xmlrpc
 
+WORKDIR /var/www
+
 # Start php-fpm
 CMD ["php-fpm"]
