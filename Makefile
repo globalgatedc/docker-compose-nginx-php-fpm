@@ -8,7 +8,7 @@ dir ?= .
 cmd ?= sh
 
 up:
-	$(COMPOSE) up -d --force-recreate --no-cache
+	$(COMPOSE) up -d --force-recreate
 
 build:
 	$(COMPOSE) build --no-cache
