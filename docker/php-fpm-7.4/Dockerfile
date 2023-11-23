@@ -1,19 +1,21 @@
-FROM php:7.4-fpm
+FROM php:7.4-fpm-alpine
 
 # Install required extensions
-RUN apt-get update && \
-  apt-get install -y \
-  libbz2-dev \
-  libcurl4-openssl-dev \
-  libfreetype6-dev \
-  libicu-dev \
-  libjpeg62-turbo-dev \
+RUN apk add --no-cache \
+  libbz2 \
+  curl-dev \
+  libcurl \
+  libjpeg-turbo \
+  libjpeg-turbo-dev \
+  libmcrypt \
   libmcrypt-dev \
+  libpng \
   libpng-dev \
+  libxml2 \
   libxml2-dev \
-  libonig-dev \
+  libzip \
+  oniguruma-dev \
   libzip-dev && \
-  rm -rf /var/lib/apt/lists/* && \
   docker-php-ext-install \
   bcmath \
   opcache \
@@ -27,7 +29,9 @@ RUN apt-get update && \
   json \
   soap \
   xml \
-  xmlrpc
+  xmlrpc && \
+  apk update && \
+  apk del gcc g++
 
 # Enable the installed extensions
 RUN docker-php-ext-enable \

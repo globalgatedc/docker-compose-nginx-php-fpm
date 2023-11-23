@@ -3,8 +3,15 @@ COMPOSE := $(DOCKER) compose
 
 .PHONY: up down ps exec-nginx exec-php-7.1 exec-php-7.4 logs clean
 
+# vars for exec $cmd on $dir
+dir ?= .
+cmd ?= sh
+
 up:
 	$(COMPOSE) up -d --force-recreate --no-cache
+
+build:
+	$(COMPOSE) build --no-cache
 
 down:
 	$(COMPOSE) down
@@ -13,22 +20,19 @@ ps:
 	$(COMPOSE) ps
 
 exec-nginx:
-	$(COMPOSE) exec nginx bash
+	$(COMPOSE) exec nginx sh
 
 exec-php-7.1:
-	$(COMPOSE) exec php-fpm-7.1 bash
+	$(COMPOSE) exec php-fpm-7.1 sh -c "cd $(dir) && $(cmd)"
 
 exec-php-7.4:
-	$(COMPOSE) exec php-fpm-7.4 bash
+	$(COMPOSE) exec php-fpm-7.4 sh -c "cd $(dir) && $(cmd)"
 
-# usage: make exec-composer dir=../project cmd="composer install"
-dir ?= .
-cmd ?= bash
 exec-composer:
-	$(COMPOSE) run --rm --user $(id -u):$(id -g) composer bash -c "cd $(dir) && $(cmd)"
+	$(COMPOSE) run --rm composer bash -c "cd $(dir) && $(cmd)"
 
 exec-node:
-	$(COMPOSE) run --rm --user $(id -u):$(id -g) node bash -c "cd $(dir) && $(cmd)"
+	$(COMPOSE) run --rm node bash -c "cd $(dir) && $(cmd)"
 
 logs:
 	$(COMPOSE) logs -f

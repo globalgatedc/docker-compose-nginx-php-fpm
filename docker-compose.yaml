@@ -2,7 +2,7 @@ version: "3"
 
 services:
   nginx:
-    image: nginx:stable
+    image: nginx:stable-alpine-slim
     user: "nginx"
     privileged: true
     restart: unless-stopped
@@ -17,8 +17,8 @@ services:
     volumes:
       - ./config/nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./config/nginx/dhparam:/etc/nginx/dhparam
-      - ./apps/app1:/var/www/app1
-      - ./apps/app2:/var/www/app2
+      - ./apps/app1:/var/www/app1:ro
+      - ./apps/app2:/var/www/app2:ro
     depends_on:
       - php-fpm-7.1
       - php-fpm-7.4
@@ -28,9 +28,10 @@ services:
     build:
       context: .
       dockerfile: docker/php-fpm-7.1/Dockerfile
+    user: "$UID"
+    userns_mode: keep-id
     ports:
       - "9001:9000"
-    user: "www-data"
     privileged: false
     restart: unless-stopped
     deploy:
@@ -39,7 +40,7 @@ services:
           cpus: "0.5"
           memory: 512M
     volumes:
-      - ./apps/app1:/var/www/app1
+      - ./apps/app1:/var/www/app1:rw
       - ./config/php-fpm-7.1/php-fpm-7.1.conf:/usr/local/etc/php-fpm.d/zz-custom.conf
       - ./config/php-fpm-7.1/php-7.1-custom.ini:/usr/local/etc/php/conf.d/zz-custom.ini
 
@@ -48,9 +49,10 @@ services:
     build:
       context: .
       dockerfile: docker/php-fpm-7.4/Dockerfile
+    user: "$UID"
+    userns_mode: keep-id
     ports:
       - "9002:9000"
-    user: "www-data"
     privileged: false
     restart: unless-stopped
     deploy:
@@ -59,7 +61,7 @@ services:
           cpus: "0.5"
           memory: 512M
     volumes:
-      - ./apps/app2:/var/www/app2
+      - ./apps/app2:/var/www/app2:rw
       - ./config/php-fpm-7.4/php-fpm-7.4.conf:/usr/local/etc/php-fpm.d/zz-custom.conf
       - ./config/php-fpm-7.4/php-7.4-custom.ini:/usr/local/etc/php/conf.d/zz-custom.ini
 
