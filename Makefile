@@ -29,10 +29,10 @@ exec-php-7.4:
 	$(COMPOSE) exec php-fpm-7.4 sh -c "cd $(dir) && $(cmd)"
 
 exec-composer:
-	$(COMPOSE) run --rm composer bash -c "cd $(dir) && $(cmd)"
+	$(COMPOSE) run --rm composer sh -c "cd $(dir) && $(cmd)"
 
 exec-node:
-	$(COMPOSE) run --rm node bash -c "cd $(dir) && $(cmd)"
+	$(COMPOSE) run --rm node sh -c "cd $(dir) && $(cmd)"
 
 logs:
 	$(COMPOSE) logs -f
