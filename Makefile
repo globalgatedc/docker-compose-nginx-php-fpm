@@ -37,5 +37,20 @@ exec-node:
 logs:
 	$(COMPOSE) logs -f
 
+log nginx:
+	$(COMPOSE) logs -f nginx
+
+log php-7.1:
+	$(COMPOSE) logs -f php-fpm-7.1
+
+log php-7.4:
+	$(COMPOSE) logs -f php-fpm-7.4
+
+log composer:
+	$(COMPOSE) logs -f composer
+
+log node:
+	$(COMPOSE) logs -f node
+
 clean:
 	$(COMPOSE) down -v --remove-orphans
