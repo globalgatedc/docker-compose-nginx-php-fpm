@@ -90,10 +90,8 @@ task('deploy:portomontt:vendors', function(){
 
 //adaptando para rodar com docker também
 task('deploy:portomontt:assets', function(){
-    run('cd {{deploy_path}}/release/web && docker run --rm -v $(pwd):/app node sh -c "cd /app/web && npm install"');
-    run('cd {{deploy_path}}/release/web && grunt');
-    run('cd {{deploy_path}}/release/web/admin/assets && npm install');
-    run('cd {{deploy_path}}/release/web/admin/assets && gulp');
+    run('cd {{deploy_path}}/release/web && docker run --rm -v $(pwd):/app node sh -c "cd /app/web && npm install && grunt"');
+    run('cd {{deploy_path}}/release/web/admin/assets && docker run --rm -v $(pwd):/app node sh -c "cd /app/web && npm install && gulp"');
     run('rm -rf {{deploy_path}}/release/web/node_modules');
     run('rm -rf {{deploy_path}}/release/web/admin/assets/node_modules');
 });
