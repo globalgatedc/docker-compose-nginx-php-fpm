@@ -72,23 +72,23 @@ logs:
 	# This command displays logs from all running containers in real time.
 
 # Display logs from specific containers
-log nginx:
+log-nginx:
 	$(COMPOSE) logs -f nginx
 	# Displays logs from the `nginx` container in real time.
 
-log php-7.1:
+log-php-7.1:
 	$(COMPOSE) logs -f php-fpm-7.1
 	# Displays logs from the `php-fpm-7.1` container in real time.
 
-log php-7.4:
+log-php-7.4:
 	$(COMPOSE) logs -f php-fpm-7.4
 	# Displays logs from the `php-fpm-7.4` container in real time.
 
-log composer:
+log-composer:
 	$(COMPOSE) logs -f composer
 	# Displays logs from the temporary `composer` container in real time.
 
-log node:
+log-node:
 	$(COMPOSE) logs -f node
 	# Displays logs from the temporary `node` container in real time.
 
