@@ -72,6 +72,8 @@ services:
     volumes:
       - ./apps/app1:/var/www/app1
       - ./apps/app2:/var/www/app2
+    user: "$UID"
+    userns_mode: keep-id
 
   node:
     image: node
@@ -83,3 +85,5 @@ services:
     volumes:
       - ./apps/app1:/var/www/app1
       - ./apps/app2:/var/www/app2
+    user: "$UID"
+    userns_mode: keep-id
