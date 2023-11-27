@@ -67,7 +67,7 @@ services:
 
   composer:
     image: composer
-    privileged: true
+    privileged: false
     working_dir: /var/www
     volumes:
       - ./apps/app1:/var/www/app1
@@ -80,7 +80,7 @@ services:
     build:
       context: .
       dockerfile: docker/node/Dockerfile
-    privileged: true
+    privileged: false
     working_dir: /var/www
     volumes:
       - ./apps/app1:/var/www/app1
