@@ -1,4 +1,4 @@
-version: "3"
+version: "3.8"
 
 services:
   nginx:
@@ -19,9 +19,6 @@ services:
       - ./config/nginx/dhparam:/etc/nginx/dhparam
       - ./apps/app1:/var/www/app1:ro
       - ./apps/app2:/var/www/app2:ro
-    depends_on:
-      - php-fpm-7.1
-      - php-fpm-7.4
 
   php-fpm-7.1:
     image: php-fpm-7.1
@@ -31,10 +28,12 @@ services:
     user: "$UID"
     userns_mode: keep-id
     ports:
-      - "9001:9000"
+      - "127.0.0.1:9001-9002:9000" #only on loopback network, using port range for replicated
     privileged: false
     restart: unless-stopped
     deploy:
+      mode: replicated
+      replicas: 2 #make multiple replicas of the container, using nginx as the proxy server will make it behave as a loadbalancer in this setup
       resources:
         limits:
           cpus: "0.5"
@@ -52,7 +51,7 @@ services:
     user: "$UID"
     userns_mode: keep-id
     ports:
-      - "9002:9000"
+      - "127.0.0.1:9002:9000"
     privileged: false
     restart: unless-stopped
     deploy:
