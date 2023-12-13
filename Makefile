@@ -98,3 +98,18 @@ clean:
 	$(COMPOSE) down -v --remove-orphans
 	# This command stops and removes all running containers (`down`), removes all
 	# volumes (`-v`), and removes all orphaned volumes and containers (`--remove-orphans`).
+
+# Docker system prune | limpa imagens/volumes/networks não usados mais
+prune:
+	$(DOCKER) system prune -a --volumes
+	# Remove all unused containers, networks, images, and volumes, including stopped containers (`-a`), and volumes (`--volumes`).
+
+# Validate Nginx configuration
+validate-nginx:
+	$(COMPOSE) exec nginx nginx -t
+	# Validate Nginx configuration without stopping the container.
+
+# Reload Nginx configuration
+reload-nginx:
+	$(COMPOSE) exec nginx nginx -s reload
+	# Reload Nginx configuration without stopping the container.
